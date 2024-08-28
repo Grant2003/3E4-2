@@ -8,7 +8,7 @@ app.get('/status',(req,res)=>{
 app.get('/', (req,res)=>{
     res.status(200);
     res.set('Content-type', 'text/html');
-    res.send('<h1>Première route </h1>');
+    res.send('<h1>Première route test </h1>');
 });
 
 export default app;
