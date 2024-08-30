@@ -11,5 +11,7 @@ app.listen(PORT,(err)=> {
         console.log(chalk.red(`${err}`));
         process.exit(1);
     }
+
     console.log(`Server listening on port asd  : ${PORT}`);
+    
 });
