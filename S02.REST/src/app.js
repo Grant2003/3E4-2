@@ -2,8 +2,17 @@ import express from 'express';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
+
+import planetsroutes from './routes/planets.route.js';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+
 const app = express();
 
+
+app.use(planetsroutes);
 
 //Route: /Status
 app.get('/status', (req, res) => {
@@ -20,16 +29,19 @@ app.get('/', (req, res) => {
 app.get('/date', (req,res)=>{
     res.status(200);
     res.set('Content-Type', 'text/plain');
-    res.send(dayjs());
+    const newDate = dayjs.tz(dayjs(),'Europe/Berlin').format();
+    res.send(newDate);
 });
 //Route : /math/somme
 app.get('/math/:operation', (req, res) => {
     //endpoint : /math/somme
     res.status(200);
     res.set('content-type', 'text/plain');
-    const operation = req.params.operation;
     const a = parseInt(req.query.a, 10);
     const b = parseInt(req.query.b, 10);
+
+    const operation = req.params.operation;
+    
     let resultat = 0;
     switch (operation) {
         case 'somme':
@@ -77,5 +89,7 @@ app.get('/math/:operation', (req, res) => {
     res.send(`resultat: ${resultat}`);
 });
 //Route : /math/produit
+
+
 
 export default app;
